@@ -76,7 +76,7 @@ class DLList(List):
 
     def isPalindrome(self) -> bool:
         # todo
-        for i in range(0, self.n):
+        for i in range(0, round(self.n/2)):
             if self.get(i) != self.get(self.n - i - 1):
                 return False
         return True
