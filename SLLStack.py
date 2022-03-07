@@ -19,7 +19,7 @@ class SLLStack(Stack):
         u.next = self.head
         self.head = u
         if self.n == 0:
-            self.tail == u;
+            self.tail = u
         self.n += 1
         return x
         pass

@@ -32,7 +32,7 @@ class SLLQueue(Queue):
         poll = self.head.x
         self.head = self.head.next
         if self.n - 1 == 0:
-            self.tail == None
+            self.tail = None
         return poll
         pass
 
