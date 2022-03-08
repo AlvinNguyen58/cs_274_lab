@@ -83,13 +83,15 @@ class DLList(List):
         pass
 
     def reverse(self):
-        head = self.get_node(0)
-        prev = None
-        while head:
-            curr = head
-            head = head.next
-            curr.next = prev
-            prev = curr
+        current = self.dummy.next
+        prev = self.dummy
+        while current != self.dummy:
+            temp = current.next
+            current.next = prev
+            current.prev = temp
+            prev = current
+            current = temp
+        self.dummy.next = prev
 
     def __str__(self):
         s = "["
