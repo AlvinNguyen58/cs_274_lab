@@ -65,7 +65,8 @@ class DLList(List):
         pass
 
     def remove(self, i: int):
-        if i < 0 or i > self.n:  raise IndexError()
+        if i < 0 or i > self.n or self.n == 0:
+            raise IndexError()
         return self._remove(self.get_node(i))
 
     def size(self) -> int:

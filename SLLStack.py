@@ -27,12 +27,13 @@ class SLLStack(Stack):
     def pop(self) -> np.object:
         # todo
         if self.n == 0:
-            raise IndexError() # checking precondition
-        pop = self.head.x
+            raise IndexError()  # checking precondition
+        pop = self.head
         self.head = self.head.next
         if self.n - 1 == 0:
-            tail = None
-        return pop
+            self.tail = None
+        self.n -= 1
+        return pop.x
         pass
 
     def size(self) -> int:
