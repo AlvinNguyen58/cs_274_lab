@@ -85,6 +85,7 @@ class DLList(List):
 
     def reverse(self):
         current = self.dummy.next
+        head = current
         prev = self.dummy
         while current != self.dummy:
             temp = current.next
@@ -93,6 +94,8 @@ class DLList(List):
             prev = current
             current = temp
         self.dummy.next = prev
+        self.dummy.prev = head
+
 
     def __str__(self):
         s = "["

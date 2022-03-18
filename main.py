@@ -36,6 +36,7 @@ def menu_bookstore_system():
         3 Add a book by index to shopping cart
         4 Remove from the shopping cart
         5 Search book by infix
+        6 Get cart best-seller
         0 Return to main menu
         """)
         option = input()
@@ -48,7 +49,7 @@ def menu_bookstore_system():
             bookStore.loadCatalog(file_name)
             # bookStore.pathLength(0, 159811)
         elif option == "2":
-            i = int(("Introduce the index to remove from catalog: "))
+            i = int("Introduce the index to remove from catalog: ")
             bookStore.removeFromCatalog(i)
         elif option == "3":
             i = int(input("Introduce the index to add to shopping cart: "))
@@ -58,6 +59,8 @@ def menu_bookstore_system():
         elif option == "5":
             infix = input("Introduce the query to search: ")
             bookStore.searchBookByInfix(infix)
+        elif option == "6":
+            bookStore.getCartBestSeller()
 
         ''' 
         Add the menu options when needed
