@@ -23,18 +23,12 @@ class ChainedHashTable(Set):
             t[i] = self.dtype()
         return t
 
-    def _hash(self, key: int) -> int:
-        return self.z * hash(key) % (2 ** self.w) >> (self.w - self.d)
-
-    def size(self) -> int:
-        return self.n
-
     def find(self, key: object) -> object:
         # todo
         h = self._hash(key)
         for i in range(len(self.t[h]) - 1):
-            if self.t[h][i].key == key:
-                return self.t[h][i].value
+            if self.t[h].get(i) == key:
+                return self.t[h].get(i)
         return None
         pass
 
@@ -44,7 +38,7 @@ class ChainedHashTable(Set):
             return False
         else:
             hash_value = self._hash(key)
-            self.t[hash_value].append(key, value)
+            self.t[hash_value].append(value)
             self.n += 1
         pass
 
@@ -81,12 +75,12 @@ class ChainedHashTable(Set):
         pass
 
     def __str__(self):
-        s = "\n"
+        s = "["
         for i in range(len(self.t)):
-            s += str(i) + " : "
             for j in range(len(self.t[i])):
-                k = self.t[i].get(j) # jth node at ith list
-                s += "(" + str(k.key) + ", " + str(k.value) + "); "
-
-            s += "\n"
-        return s
+                k = self.t[i][j]
+                s += str(k.key)
+                s += ":"
+                s += str(k.value)
+                s += ";"
+        return s + "]"
