@@ -37,6 +37,7 @@ def menu_bookstore_system():
         4 Remove from the shopping cart
         5 Search book by infix
         6 Get cart best-seller
+        7 Add a book by key to shopping cart
         0 Return to main menu
         """)
         option = input()
@@ -61,6 +62,9 @@ def menu_bookstore_system():
             bookStore.searchBookByInfix(infix)
         elif option == "6":
             bookStore.getCartBestSeller()
+        elif option == "7":
+            infix = input("Introduce the key to add to shopping cart: ")
+            bookStore.addBookByKey(infix)
 
         ''' 
         Add the menu options when needed

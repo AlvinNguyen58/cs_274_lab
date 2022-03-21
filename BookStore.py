@@ -21,6 +21,7 @@ class BookStore:
     def __init__(self):
         self.bookCatalog = None
         self.shoppingCart = MaxQueue.MaxQueue()
+        self.bookIndices = ChainedHashTable.ChainedHashTable()
 
     def loadCatalog(self, fileName: str):
         '''
@@ -36,6 +37,7 @@ class BookStore:
                 (key, title, group, rank, similar) = line.split("^")
                 s = Book.Book(key, title, group, rank, similar)
                 self.bookCatalog.append(s)
+                self.bookIndices.add(s.key, self.bookCatalog.size() - 1)
             # The following line is used to calculate the total time 
             # of execution
             elapsed_time = time.time() - start_time
@@ -113,8 +115,22 @@ class BookStore:
         start_time = time.time()
         if self.shoppingCart.size() > 0:
             u = self.shoppingCart.remove()
-            elapsed_time = time.time() - start_time
-            print(f"removeFromShoppingCart {u} Completed in {elapsed_time} seconds")
+            info = u.__str__()
+            print(f"removeFromShoppingCart {info}")
+        elapsed_time = time.time() - start_time
+        print(f"Completed in {elapsed_time} seconds")
 
     def getCartBestSeller(self):
         print(self.shoppingCart.max())
+
+    def addBookByKey(self, key):
+        start_time = time.time()
+        if self.bookIndices.find(key) is not None:
+            b = self.bookIndices.find(key)
+            s = self.bookCatalog.get(b)
+            self.shoppingCart.add(s)
+            print(f"Added title: {s.title}")
+        else:
+            print("Book not found.")
+        elapsed_time = time.time() - start_time
+        print(f"addBookByKey Completed in {elapsed_time} seconds")
