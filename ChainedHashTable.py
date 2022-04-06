@@ -41,7 +41,7 @@ class ChainedHashTable(Set):
         # todo
         if self.find(key) is not None:
             return False
-        if len(self.t) == self.n:
+        if len(self.t) >= self.n:
             self.resize()
         hash_value = self._hash(key)
         kv = self.Node(key, value)
