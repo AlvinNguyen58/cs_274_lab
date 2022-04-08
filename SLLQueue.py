@@ -28,13 +28,12 @@ class SLLQueue(Queue):
     def remove(self) -> np.object:
         # todo
         if self.n == 0:
-            raise IndexError()
-        poll = self.head
+            raise ValueError()
+        poll = self.head.x
         self.head = self.head.next
         if self.n - 1 == 0:
-            self.tail = None
-        self.n -= 1
-        return poll.x
+            self.tail == None
+        return poll
         pass
 
     def size(self) -> int:

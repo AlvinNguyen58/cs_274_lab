@@ -19,7 +19,7 @@ class SLLStack(Stack):
         u.next = self.head
         self.head = u
         if self.n == 0:
-            self.tail = u
+            self.tail == u;
         self.n += 1
         return x
         pass
@@ -27,13 +27,12 @@ class SLLStack(Stack):
     def pop(self) -> np.object:
         # todo
         if self.n == 0:
-            raise IndexError()  # checking precondition
-        pop = self.head
+            raise IndexError() # checking precondition
+        pop = self.head.x
         self.head = self.head.next
         if self.n - 1 == 0:
-            self.tail = None
-        self.n -= 1
-        return pop.x
+            tail = None
+        return pop
         pass
 
     def size(self) -> int:

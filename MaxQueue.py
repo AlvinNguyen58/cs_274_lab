@@ -12,28 +12,14 @@ class MaxQueue(SLLQueue):
         adds an element to the end of this max queue
         INPUT: x the element to add
         """
-        SLLQueue.add(self, x)
-        if self.max_deque.size() == 0:
-            self.max_deque.add_first(x)
-        elif x > self.max():
-            self.max_deque = DLLDeque()
-            self.max_deque.add_first(x)
-        else:
-            tail = self.max_deque.get(self.max_deque.n - 1)
-            while x > tail:
-                self.max_deque.remove_last()
-                tail = self.max_deque.get(self.max_deque.n - 1)
-            self.max_deque.add_last(x)
+
         pass
 
     def remove(self) -> object:
         """
         removes and returns the element at the head of the max queue
         """
-        poll = SLLQueue.remove(self)
-        if poll == self.max_deque.get(0):
-            self.max_deque.remove_first()
-        return poll
+
         pass
 
     def max(self):

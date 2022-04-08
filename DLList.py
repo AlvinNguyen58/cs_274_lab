@@ -65,8 +65,7 @@ class DLList(List):
         pass
 
     def remove(self, i: int):
-        if i < 0 or i > self.n or self.n == 0:
-            raise IndexError()
+        if i < 0 or i > self.n:  raise IndexError()
         return self._remove(self.get_node(i))
 
     def size(self) -> int:
@@ -77,25 +76,20 @@ class DLList(List):
 
     def isPalindrome(self) -> bool:
         # todo
-        for i in range(0, round(self.n/2)):
+        for i in range(0, self.n):
             if self.get(i) != self.get(self.n - i - 1):
                 return False
         return True
         pass
 
     def reverse(self):
-        current = self.dummy.next
-        head = current
-        prev = self.dummy
-        while current != self.dummy:
-            temp = current.next
-            current.next = prev
-            current.prev = temp
-            prev = current
-            current = temp
-        self.dummy.next = prev
-        self.dummy.prev = head
-
+        head = self.get_node(0)
+        prev = None
+        while head:
+            curr = head
+            head = head.next
+            curr.next = prev
+            prev = curr
 
     def __str__(self):
         s = "["

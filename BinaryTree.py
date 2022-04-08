@@ -37,6 +37,7 @@ class BinaryTree:
         current = u
         d = 0
         while current is not self.r:
+            current = current.parent
             d += 1
         return d
 
@@ -52,8 +53,8 @@ class BinaryTree:
     def size2(self) -> int:
         # todo
         u = self.r
+        prev = None
         n = 0
-        prev, next = None
         while u is not None:
             if prev == u.parent:
                 n += 1
@@ -66,8 +67,6 @@ class BinaryTree:
             elif prev == u.left:
                 if u.right is not None:
                     next = u.right
-                else:
-                    next = u.parent
             else:
                 next = u.parent
             prev = u
@@ -77,7 +76,7 @@ class BinaryTree:
     def _height(self, u: Node) -> int:
         # todo
         if u is None:
-            return -1
+            return 0
         return 1 + max(self._height(u.left), self._height(u.right))
 
     def height(self) -> int:
@@ -85,7 +84,6 @@ class BinaryTree:
 
     def _in_order(self, u: Node) -> list:
         # todo
-
         pass
 
     def in_order(self) -> list:
@@ -107,7 +105,16 @@ class BinaryTree:
 
     def bf_traverse(self):
         # todo
-        pass
+        q = ArrayQueue.ArrayQueue()
+        if self.r is not None:
+            q.add(self.r)
+        while q.size() > 0:
+            u = q.remove()
+            if u.left is not None:
+                q.add(u.left)
+            if u.right is not None:
+                q.add(u.right)
+        return q
 
     def first_node(self):
         w = self.r
