@@ -84,6 +84,7 @@ class BinaryTree:
 
     def _in_order(self, u: Node) -> list:
         # todo
+
         pass
 
     def in_order(self) -> list:
@@ -106,15 +107,17 @@ class BinaryTree:
     def bf_traverse(self):
         # todo
         q = ArrayQueue.ArrayQueue()
+        arr = []
         if self.r is not None:
             q.add(self.r)
         while q.size() > 0:
             u = q.remove()
+            arr.append(u.__str__())
             if u.left is not None:
                 q.add(u.left)
             if u.right is not None:
                 q.add(u.right)
-        return q
+        return arr
 
     def first_node(self):
         w = self.r
