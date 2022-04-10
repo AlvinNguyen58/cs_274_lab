@@ -82,27 +82,41 @@ class BinaryTree:
     def height(self) -> int:
         return self._height(self.r)
 
-    def _in_order(self, u: Node) -> list:
+    def _in_order(self, u: Node, arr) -> list:
         # todo
-
-        pass
+        if u:
+            self._in_order(u.left, arr)
+            arr.append(u.__str__())
+            self._in_order(u.right, arr)
+        return arr
 
     def in_order(self) -> list:
-        return self._in_order(self.r)
+        arr = []
+        return self._in_order(self.r, arr)
 
-    def _pre_order(self, u: Node) -> list:
+    def _pre_order(self, u: Node, arr: list) -> list:
         # todo
-        pass
+        if u:
+            arr.append(u.__str__())
+            self._pre_order(u.left, arr)
+            self._pre_order(u.right, arr)
+        return arr
 
     def pre_order(self) -> list:
-        return self._pre_order(self.r)
+        arr = []
+        return self._pre_order(self.r, arr)
 
-    def _post_order(self, u: Node) -> list:
+    def _post_order(self, u: Node, arr: list) -> list:
         # todo
-        pass
+        if u:
+            self._post_order(u.left, arr)
+            self._post_order(u.right, arr)
+            arr.append(u.__str__())
+        return arr
 
     def post_order(self) -> list:
-        return self._post_order(self.r)
+        arr = []
+        return self._post_order(self.r, arr)
 
     def bf_traverse(self):
         # todo

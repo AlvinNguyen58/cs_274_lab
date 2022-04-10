@@ -100,6 +100,7 @@ class BinarySearchTree(BinaryTree, Set):
 
         if self.r is u:
             self.r = s
+
         else:
             p = u.parent
             if u == p.left:
@@ -123,13 +124,13 @@ class BinarySearchTree(BinaryTree, Set):
                 u.v = w.v
                 self.splice(w)
             return u.v
-        return None
+        else:
+            raise IndexError()
 
     def remove(self, x: object) -> bool:
         # todo
         w = self.find(x)
-        self.remove_node(w)
-        pass
+        return self.remove_node(w)
 
     def __iter__(self):
         u = self.first_node()

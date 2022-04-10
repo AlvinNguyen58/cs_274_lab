@@ -22,6 +22,7 @@ class BookStore:
         self.bookCatalog = None
         self.shoppingCart = MaxQueue.MaxQueue()
         self.bookIndices = ChainedHashTable.ChainedHashTable()
+        self.sortedTitleIndices = BinarySearchTree.BinarySearchTree()
 
     def loadCatalog(self, fileName: str):
         '''
@@ -38,6 +39,7 @@ class BookStore:
                 s = Book.Book(key, title, group, rank, similar)
                 self.bookCatalog.append(s)
                 self.bookIndices.add(s.key, self.bookCatalog.size() - 1)
+                self.sortedTitleIndices.add(s.title, self.bookCatalog.size() - 1)
             # The following line is used to calculate the total time 
             # of execution
             elapsed_time = time.time() - start_time
@@ -110,7 +112,7 @@ class BookStore:
 
     def removeFromShoppingCart(self):
         '''
-        removeFromShoppingCart: remove one book from the shoppung cart  
+        removeFromShoppingCart: remove one book from the shopping cart
         '''
         start_time = time.time()
         if self.shoppingCart.size() > 0:
@@ -134,3 +136,15 @@ class BookStore:
             print("Book not found.")
         elapsed_time = time.time() - start_time
         print(f"addBookByKey Completed in {elapsed_time} seconds")
+
+    def addBookByPrefix(self, prefix):
+        start_time = time.time()
+        if self.sortedTitleIndices.find(prefix) is not None:
+            b = self.sortedTitleIndices.find(prefix)
+            s = self.sortedTitleIndices.get(b)
+            self.shoppingCart.add(s)
+            print(f"Added title: {s.title}")
+        else:
+            print("Book not found.")
+        elapsed_time = time.time() - start_time
+        print(f"addBookByPrefix Completed in {elapsed_time} seconds")
