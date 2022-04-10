@@ -30,7 +30,7 @@ class BookStore:
                 book records are separated by  ^. The order is key, 
                 title, group, rank (number of copies sold) and similar books
         '''
-        self.bookCatalog = DLList.DLList()
+        self.bookCatalog = ArrayList.ArrayList()
         with open(fileName, encoding="utf8") as f:
             # The following line is the time that the computation starts
             start_time = time.time()
