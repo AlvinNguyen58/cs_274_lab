@@ -19,7 +19,7 @@ class BookStore:
     '''
 
     def __init__(self):
-        self.bookCatalog = None
+        self.bookCatalog = DLList.DLList()
         self.shoppingCart = MaxQueue.MaxQueue()
         self.bookIndices = ChainedHashTable.ChainedHashTable()
         self.sortedTitleIndices = BinarySearchTree.BinarySearchTree()
@@ -30,7 +30,6 @@ class BookStore:
                 book records are separated by  ^. The order is key, 
                 title, group, rank (number of copies sold) and similar books
         '''
-        self.bookCatalog = ArrayList.ArrayList()
         with open(fileName, encoding="utf8") as f:
             # The following line is the time that the computation starts
             start_time = time.time()
@@ -38,6 +37,7 @@ class BookStore:
                 (key, title, group, rank, similar) = line.split("^")
                 s = Book.Book(key, title, group, rank, similar)
                 self.bookCatalog.append(s)
+                print(s)
                 self.bookIndices.add(s.key, self.bookCatalog.size() - 1)
                 self.sortedTitleIndices.add(s.title, self.bookCatalog.size() - 1)
             # The following line is used to calculate the total time 
