@@ -59,7 +59,7 @@ class BinaryHeap(Queue):
     def remove(self):
         # todo
         if self.n == 0:
-            raise IndexError()
+            raise IndexError("Empty Heap.")
         temp = self.a[0]
         self.a[0] = self.a[self.n - 1]
         self.n -= 1
@@ -99,7 +99,7 @@ class BinaryHeap(Queue):
     def __str__(self):
         s = "["
         for i in range(0, self.n):
-            s += "%r" % self.a[(i + self.j) % len(self.a)]
+            s += "%r" % self.a[i]
             if i < self.n - 1:
                 s += ","
         return s + "]"

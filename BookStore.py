@@ -19,7 +19,7 @@ class BookStore:
     '''
 
     def __init__(self):
-        self.bookCatalog = DLList.DLList()
+        self.bookCatalog = ArrayList.ArrayList()
         self.shoppingCart = MaxQueue.MaxQueue()
         self.bookIndices = ChainedHashTable.ChainedHashTable()
         self.sortedTitleIndices = BinarySearchTree.BinarySearchTree()
@@ -37,9 +37,7 @@ class BookStore:
                 (key, title, group, rank, similar) = line.split("^")
                 s = Book.Book(key, title, group, rank, similar)
                 self.bookCatalog.append(s)
-                print(s)
-                self.bookIndices.add(s.key, self.bookCatalog.size() - 1)
-                self.sortedTitleIndices.add(s.title, self.bookCatalog.size() - 1)
+
             # The following line is used to calculate the total time 
             # of execution
             elapsed_time = time.time() - start_time
@@ -148,3 +146,39 @@ class BookStore:
             print("Book not found.")
         elapsed_time = time.time() - start_time
         print(f"addBookByPrefix Completed in {elapsed_time} seconds")
+
+    def bestsellers_with(self, infix, structure, n=0):
+        if infix == "":
+            raise IndexError("Invalid infix.")
+        else:
+
+            if structure == 1:
+                start_time = time.time()
+                bestsellers = BinarySearchTree.BinarySearchTree()
+                for i in range(self.bookCatalog.size()):
+                    b = self.bookCatalog.get(i)
+                    if bestsellers.size() > n:
+                        break
+                    if infix in b.title:
+                        bestsellers.add(b.rank, b)
+                    print(bestsellers.post_order())
+                elapsed_time = start_time - time.time()
+                print(f"Displayed bestsellers_with({infix}, {structure}, {n}) in {elapsed_time} seconds")
+            elif structure == 2:
+                start_time = time.time()
+                bestsellers = BinaryHeap.BinaryHeap()
+                for i in range(self.bookCatalog.size()):
+                    b = self.bookCatalog.get(i)
+                    if bestsellers.size() > n:
+                        break
+                    if infix in b.title:
+                        b.rank = b.rank * -1
+                        bestsellers.add(b)
+                for i in range(bestsellers.size()):
+                    print(bestsellers)
+                elapsed_time = start_time - time.time()
+                print(f"Displayed bestsellers_with({infix}, {structure}, {n}) in {elapsed_time} seconds")
+
+            else:
+                print("Invalid data structure.")
+
