@@ -151,9 +151,9 @@ class BookStore:
         if infix == "":
             raise IndexError("Invalid infix.")
         else:
-
+            start_time = time.time()
             if structure == 1:
-                start_time = time.time()
+
                 bestsellers = BinarySearchTree.BinarySearchTree()
                 for i in range(self.bookCatalog.size()):
                     b = self.bookCatalog.get(i)
@@ -161,9 +161,10 @@ class BookStore:
                         break
                     if infix in b.title:
                         bestsellers.add(b.rank, b)
-                    print(bestsellers.post_order())
-                elapsed_time = start_time - time.time()
-                print(f"Displayed bestsellers_with({infix}, {structure}, {n}) in {elapsed_time} seconds")
+                a = bestsellers.in_order()
+                for b in a:
+                    print(b.__str__())
+
             elif structure == 2:
                 start_time = time.time()
                 bestsellers = BinaryHeap.BinaryHeap()
@@ -175,10 +176,12 @@ class BookStore:
                         b.rank = b.rank * -1
                         bestsellers.add(b)
                 for i in range(bestsellers.size()):
-                    print(bestsellers)
-                elapsed_time = start_time - time.time()
-                print(f"Displayed bestsellers_with({infix}, {structure}, {n}) in {elapsed_time} seconds")
+                    book = bestsellers.remove()
+                    book.rank = book.rank * -1
+                    print(book)
+                else:
+                    print("Invalid data structure.")
+            elapsed_time = start_time - time.time()
+            print(f"Displayed bestsellers_with({infix}, {structure}, {n}) in {elapsed_time} seconds")
 
-            else:
-                print("Invalid data structure.")
 

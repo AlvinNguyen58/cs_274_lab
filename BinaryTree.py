@@ -27,7 +27,7 @@ class BinaryTree:
         def __str__(self):
             if self.v is None:
                 return str(self.x)
-            return f"({self.x}, {self.v})"
+            return f"({self.v})"
 
     def __init__(self):
         self.r = None
