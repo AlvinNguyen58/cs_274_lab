@@ -37,7 +37,7 @@ class Book:
         return self.title >= a.title
 
     def __eq__(self, a):
-        if len(self.title) > len(a.title):
+        if len(str(self.title)) > len(str(a.title)):
             return a.title in self.title
         else:
             return self.title in a.title

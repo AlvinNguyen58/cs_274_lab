@@ -11,6 +11,8 @@ import BinaryHeap
 import AdjacencyList
 import time
 
+import algorithms
+
 
 class BookStore:
     '''
@@ -19,7 +21,7 @@ class BookStore:
     '''
 
     def __init__(self):
-        self.bookCatalog = ArrayList.ArrayList()
+        self.bookCatalog = None
         self.shoppingCart = MaxQueue.MaxQueue()
         self.bookIndices = ChainedHashTable.ChainedHashTable()
         self.sortedTitleIndices = BinarySearchTree.BinarySearchTree()
@@ -30,6 +32,7 @@ class BookStore:
                 book records are separated by  ^. The order is key, 
                 title, group, rank (number of copies sold) and similar books
         '''
+        self.bookCatalog = ArrayList.ArrayList()
         with open(fileName, encoding="utf8") as f:
             # The following line is the time that the computation starts
             start_time = time.time()
@@ -181,7 +184,45 @@ class BookStore:
                     print(book)
                 else:
                     print("Invalid data structure.")
-            elapsed_time = start_time - time.time()
+            elapsed_time = time.time() - start_time
             print(f"Displayed bestsellers_with({infix}, {structure}, {n}) in {elapsed_time} seconds")
 
+    def sort_catalog(self, s):
+        start_time = time.time()
+        if s == 1:
+            algorithms.merge_sort(self.bookCatalog)
+        elif s == 2:
+            algorithms.quick_sort(self.bookCatalog)
+        elif s == 3:
+            algorithms.quick_sort(self.bookCatalog, False)
+        else:
+            print("Invalid algorithm")
+        elapsed_time =time.time() - start_time
+        print(f"Sorted {self.bookCatalog.size()} books in {elapsed_time} seconds.")
 
+    def search_by_prefix(self, prefix, algo):
+        start_time = time.time()
+        n = 0
+        if algo == 1:
+            book_copy = self.bookCatalog
+            while algorithms.linear_search(book_copy, prefix) != -100:
+                print(book_copy.remove(algorithms.linear_search(book_copy, prefix)))
+                n += 1
+        elif algo == 2:
+            book_copy = self.bookCatalog
+            algorithms.quick_sort(book_copy)
+            while algorithms.binary_search(book_copy, prefix) != -100:
+                print(book_copy.remove(algorithms.binary_search(book_copy, prefix)))
+                n += 1
+        else:
+            print("Invalid algorithm")
+        elapsed_time = time.time() - start_time
+        print(f"Found {n} of books with prefix {prefix} in {elapsed_time}")
+
+    def display_catalog(self, n):
+        i = 0
+        for book in self.bookCatalog:
+            if i >= int(n):
+                break
+            print(book)
+            i += 1

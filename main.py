@@ -40,6 +40,9 @@ def menu_bookstore_system():
         7 Add a book by key to shopping cart
         8 Add a book by title prefix to shopping cart
         9 Search best-sellers with infix
+        10 Sort the catalog
+        11 Search book by prefix
+        12 Display the first n books of catalog
         0 Return to main menu
         """)
         option = input()
@@ -52,7 +55,7 @@ def menu_bookstore_system():
             bookStore.loadCatalog(file_name)
             # bookStore.pathLength(0, 159811)
         elif option == "2":
-            i = int("Introduce the index to remove from catalog: ")
+            i = int(input("Introduce the index to remove from catalog: "))
             bookStore.removeFromCatalog(i)
         elif option == "3":
             i = int(input("Introduce the index to add to shopping cart: "))
@@ -75,6 +78,24 @@ def menu_bookstore_system():
             structure = int(input("Enter structure (1 or 2): "))
             n = int(input("Enter max number of titles: "))
             bookStore.bestsellers_with(infix, structure, n)
+        elif option == "10":
+            print("""Choose an algorithm: 
+                  1 - Merge Sort 
+                  2 - Quick Sort (first element pivot) 
+                  3 - Quick Sort (random element pivot) """)
+            algo = int(input("Your selection: "))
+            bookStore.sort_catalog(algo)
+        elif option == "11":
+            prefix = input("Enter prefix: ")
+            print("""Choose an algorithm:"
+                  1 - Linear Search
+                  2 - Binary Search""")
+            algo = int(input("Your Selection: "))
+            bookStore.search_by_prefix(prefix, algo)
+
+        elif option == "12":
+            n = input("Enter the number of books to display: ")
+            bookStore.display_catalog(n)
         ''' 
         Add the menu options when needed
         '''
