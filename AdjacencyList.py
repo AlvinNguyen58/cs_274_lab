@@ -16,35 +16,69 @@ class AdjacencyList(Graph):
 
     def add_edge(self, i : int, j : int):
         # todo
-        self.adj[i][j] = True
+        self.adj[i].append(j)
 
     def remove_edge(self, i : int, j : int):
         # todo
-        self.adj[i][j] = False
+        for k in range(len(self.adj[i])):
+            if self.adj[i][k] == j:
+                self.adj[i].remove(k)
 
-    def has_edge(self, i : int, j: int) ->bool:
+    def has_edge(self, i : int, j: int) -> bool:
         # todo
-        return self.adj[i][j]
+        for k in range(len(self.adj[i])):
+            if self.adj[i][k] == j:
+                return True
+        return False
 
     def out_edges(self, i) -> List:
         # todo
-        out = ArrayList.ArrayList()
-        for j in range(len(a[i])):
-            if a[i][j]:  # this is True if node i has outgoing edge to j
-                out.append(j)
-        return out
+        return self.adj[i]
 
-    def in_edges(self, i) -> List:
+    def in_edges(self, i, j) -> List:
         # todo
-        pass
+        in_edg = ArrayList.ArrayList()
+        for i in range(self.n):
+            if self.has_edge(i, j):
+                in_edg.append(i)
+        return in_edg
 
     def bfs(self, r : int):
         # todo
-        pass
+        traversal = ArrayList.ArrayList()
+        seen = ArrayList.ArrayList()
+        q = ArrayQueue.ArrayQueue()
+        traversal.append(r)
+        seen[r] = True
+        q.add(r)
+        while q.size() > 0:
+            current = q.remove()
+            neighbors = self.out_edges(current)
+            for i in range(0, len(neighbors)):
+                neighbor = neighbors[i]
+                if not seen[neighbor]:
+                    traversal.append(neighbor)
+                    seen[neighbor] = True
+                    q.add(neighbor)
+        return traversal
+
 
     def dfs(self, r : int):
         # todo
-        pass
+        traversal = ArrayList.ArrayList()
+        seen = ArrayList.ArrayList()  # n is the number of nodes
+        stack = ArrayStack.ArrayStack()
+        stack.push(r)
+        while stack.size() > 0:
+            current = stack.pop()
+            if not seen[current]:
+                traversal.append(current)
+            seen[current] = True
+            neighbors = self.out_edges(current)
+            for neighbor in reversed(neighbors):
+                if not seen[neighbor]:
+                    stack.push(neighbor)
+        return traversal
 
     def __str__(self):
         s = ""
